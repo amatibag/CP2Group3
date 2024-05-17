@@ -45,6 +45,17 @@ public class CP2motorPH {
             }}catch (IOException ex) {
                 System.out.println(" ");
             }
+            
+        //print header into the file
+        try{
+        FileWriter header = new FileWriter("paySummary.txt");
+        PrintWriter prheader = new PrintWriter(header);
+        
+        prheader.printf("%-15s%-33s%-16s%-12s%-20s%-16s%-24s%-15s%-15s","Employee#","Employee Name","GrossPay","SSS","PhilHealth","PagIbig","WitholdingTax","Benefits","NetPay");
+        header.close();
+        }catch (IOException ex) {
+            System.out.println(" ");
+}
             startPayroll();
     }
          
