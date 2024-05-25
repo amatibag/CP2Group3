@@ -1,2 +1,2 @@
 Employee#      Employee Name                    GrossPay        SSS         PhilHealth          PagIbig         WitholdingTax           Benefits       NetPay         
-22             Delos Santos, Kolby              211861.38       1080.0      360.0               100.0           54802.73                2500.0         158018.65      
+15             Romualdez, Fredrick              472261.35       1125.0      802.5               100.0           137974.72               3500.0         335759.13      
