@@ -4,6 +4,8 @@
  */
 package cp2motorph;
 
+import static cp2motorph.Payslip.generateNBPayslip;
+import static cp2motorph.Payslip.generateWPayslip;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -141,8 +143,8 @@ public class CP2motorPH {
             netPay = (Math.round(netPay*100.0)/100.0);
             String compN = lastN + ", " + firstN;
            
-            System.out.println("\n" + "Employee Number:     " + eeNo);
-            System.out.println("Employee Name:      " + compN);
+            System.out.println("\n" + "     Employee Number:     " + eeNo);
+            System.out.println("     Employee Name:       " + compN);
             System.out.println("    ---------------------------------------------------------------");
             System.out.println("    Total Earnings:                                 " + netGross + "\n");
             System.out.println("    SSS Deduction:                                  " + sssDed);
@@ -174,7 +176,7 @@ public class CP2motorPH {
             }catch (IOException ex) {
                 System.out.println("File append error...");
             }
-            
+            generateNBPayslip(eeNo, compN, netGross, sssDed, pHealthDed, pagIbigDed, sssPHpi, net, withHTax, netPay);
             System.out.println("What would you like to do next? "+ "\n" +
                                 "A. Calculate Salary for another employee" + "\n" +
                                 "B. View payroll input summary file"+ "\n" +
@@ -238,7 +240,7 @@ public class CP2motorPH {
             }catch (IOException ex) {
                 System.out.println("File append error...");
             }
-            
+            generateWPayslip(eeNo, compN, netGross, sssDed, pHealthDed, pagIbigDed, sssPHpi, net, withHTax, nBen, rice, phone, clothing, netPaywithBen); 
             System.out.println("What would you like to do next? "+ "\n" +
                                 "A. Calculate Salary for another employee" + "\n" +
                                 "B. View payroll input summary file"+ "\n" +
@@ -283,6 +285,5 @@ public class CP2motorPH {
         }
         System.out.println("Console cleared!");
     }
-    
 
 }
