@@ -4,17 +4,22 @@
  */
 package cp2motorph;
 
+import static cp2motorph.CP2motorPH.viewSummary;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -66,6 +71,8 @@ public class Payslip {
         } catch (IOException ex) {
             System.out.println("Error occurred while writing to the file: " + ex.getMessage());
         }
+        
+        
 
         // Create and configure JLabels
         ImageIcon motorPHheader = new ImageIcon("MotorPHHeader.png");
@@ -125,7 +132,37 @@ public class Payslip {
         payDetails.setVerticalAlignment(JLabel.TOP);
         payDetails.setHorizontalAlignment(JLabel.CENTER);
         payDetails.setBounds(50, 150, 1150, 900);
+        
+        JButton closeButtonA = new JButton();
+        closeButtonA.setBounds(450, 850, 350, 30);
+        closeButtonA.setText("Calculate Salary for another employee");
+        closeButtonA.setFocusable(false);
+        closeButtonA.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Close the JFrame when the button is clicked
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(closeButtonA);
+                frame.dispose();
+                // Call the startPayroll method
+                CP2motorPH.startPayroll();
+            }
+        });
+        
+        JButton closeButtonB = new JButton();
+        closeButtonB.setBounds(450, 900, 350, 30);
+        closeButtonB.setText("View payroll input summary file");
+        closeButtonB.setFocusable(false);
+        closeButtonB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Close the JFrame when the button is clicked
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(closeButtonA);
+                frame.dispose();
+                // Call the startPayroll method
+                CP2motorPH.viewSummary();
+            }
+        });
 
+
+        
         // Create layered pane and add components
         JLayeredPane headerPane = new JLayeredPane();
         headerPane.setBounds(0, 0, 1500, 1000);
@@ -133,6 +170,9 @@ public class Payslip {
         headerPane.add(bodyLabel, Integer.valueOf(1));
         headerPane.add(eeName, Integer.valueOf(2));
         headerPane.add(payDetails, Integer.valueOf(3));
+        headerPane.add(closeButtonA, Integer.valueOf(4));
+        headerPane.add(closeButtonB, Integer.valueOf(4));
+
 
         // Create and configure JFrame
         JFrame homeframe = new JFrame("JLayeredPane");
@@ -141,9 +181,9 @@ public class Payslip {
         homeframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         homeframe.getContentPane().setBackground(new Color(0x0E3171));
         homeframe.setSize(new Dimension(1265, 1000));
-        homeframe.setVisible(true);
         ImageIcon appLogo = new ImageIcon("logo.png");
         homeframe.setIconImage(appLogo.getImage());
+        homeframe.setVisible(true);
     
     }
     
@@ -262,6 +302,34 @@ public class Payslip {
         payDetails.setVerticalAlignment(JLabel.TOP);
         payDetails.setHorizontalAlignment(JLabel.CENTER);
         payDetails.setBounds(50, 150, 1150, 900);
+        
+        JButton closeButtonA = new JButton();
+        closeButtonA.setBounds(450, 850, 350, 30);
+        closeButtonA.setText("Calculate Salary for another employee");
+        closeButtonA.setFocusable(false);
+        closeButtonA.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Close the JFrame when the button is clicked
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(closeButtonA);
+                frame.dispose();
+                // Call the startPayroll method
+                CP2motorPH.startPayroll();
+            }
+        });
+        
+        JButton closeButtonB = new JButton();
+        closeButtonB.setBounds(450, 900, 350, 30);
+        closeButtonB.setText("View payroll input summary file");
+        closeButtonB.setFocusable(false);
+        closeButtonB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Close the JFrame when the button is clicked
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(closeButtonA);
+                frame.dispose();
+                // Call the startPayroll method
+                CP2motorPH.viewSummary();
+            }
+        });
 
         // Create layered pane and add components
         JLayeredPane headerPane = new JLayeredPane();
@@ -270,6 +338,8 @@ public class Payslip {
         headerPane.add(bodyLabel, Integer.valueOf(1));
         headerPane.add(eeName, Integer.valueOf(2));
         headerPane.add(payDetails, Integer.valueOf(3));
+        headerPane.add(closeButtonA, Integer.valueOf(4));
+        headerPane.add(closeButtonB, Integer.valueOf(4));
 
         // Create and configure JFrame
         JFrame homeframe = new JFrame("JLayeredPane");

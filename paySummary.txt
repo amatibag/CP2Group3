@@ -1,2 +1,2 @@
 Employee#      Employee Name                    GrossPay        SSS         PhilHealth          PagIbig         WitholdingTax           Benefits       NetPay         
-23             Santos, Vella                    195269.94       1012.5      337.5               100.0           49522.27                2500.0         146797.67      
+22             Delos Santos, Kolby              211861.38       1080.0      360.0               100.0           54802.73                2500.0         158018.65      
