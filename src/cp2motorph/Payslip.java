@@ -160,7 +160,18 @@ public class Payslip {
                 CP2motorPH.viewSummary();
             }
         });
+        
+        JButton paySlip = new JButton();
+        paySlip.setBounds(450, 800, 350, 30);
+        paySlip.setText("View payslip file");
+        paySlip.setFocusable(false);
+        paySlip.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
+                // Call the startPayroll method
+                CP2motorPH.slipLauncher(eeNo);
+            }
+        });
 
         
         // Create layered pane and add components
@@ -172,6 +183,7 @@ public class Payslip {
         headerPane.add(payDetails, Integer.valueOf(3));
         headerPane.add(closeButtonA, Integer.valueOf(4));
         headerPane.add(closeButtonB, Integer.valueOf(4));
+        headerPane.add(paySlip, Integer.valueOf(4));
 
 
         // Create and configure JFrame
@@ -317,6 +329,7 @@ public class Payslip {
             }
         });
         
+        
         JButton closeButtonB = new JButton();
         closeButtonB.setBounds(450, 900, 350, 30);
         closeButtonB.setText("View payroll input summary file");
@@ -330,7 +343,19 @@ public class Payslip {
                 CP2motorPH.viewSummary();
             }
         });
+        
+        JButton paySlip = new JButton();
+        paySlip.setBounds(450, 800, 350, 30);
+        paySlip.setText("View payslip file");
+        paySlip.setFocusable(false);
+        paySlip.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
 
+                // Call the startPayroll method
+                CP2motorPH.slipLauncher(eeNo);
+            }
+        });
+        
         // Create layered pane and add components
         JLayeredPane headerPane = new JLayeredPane();
         headerPane.setBounds(0, 0, 1500, 1000);
@@ -340,6 +365,7 @@ public class Payslip {
         headerPane.add(payDetails, Integer.valueOf(3));
         headerPane.add(closeButtonA, Integer.valueOf(4));
         headerPane.add(closeButtonB, Integer.valueOf(4));
+        headerPane.add(paySlip, Integer.valueOf(4));
 
         // Create and configure JFrame
         JFrame homeframe = new JFrame("JLayeredPane");

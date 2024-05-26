@@ -320,6 +320,38 @@ public class CP2motorPH {
         System.out.println("\n" + "Continue with payroll calculation." + "\n");
         startPayroll();
     }
+    
+    public static void slipLauncher(int eeNo) {
+        
+        
+        // Read and print the contents of paySummary.txt
+        try (BufferedReader slipSummary = new BufferedReader(new FileReader("Employee_" + eeNo + "_payslip.txt"))) {
+            String line;
+            while ((line = slipSummary.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error encountered reading the file...");
+        }
+
+        // Automatically launch the paySummary.txt file
+        File file = new File("Employee_" + eeNo + "_payslip.txt");
+        if (file.exists()) {
+            if (Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+                try {
+                    desktop.open(file);
+                } catch (IOException e) {
+                    System.out.println("Error encountered opening the file...");
+                }
+            } else {
+                System.out.println("Desktop is not supported on this platform.");
+            }
+        } else {
+            System.out.println("The file PaySlip does not exist.");
+        }
+
+    }
 
     
     

@@ -1,2 +1,1 @@
 Employee#      Employee Name                    GrossPay        SSS         PhilHealth          PagIbig         WitholdingTax           Benefits       NetPay         
-15             Romualdez, Fredrick              472261.35       1125.0      802.5               100.0           137974.72               3500.0         335759.13      
