@@ -6,6 +6,7 @@ package cp2motorph;
 
 import static cp2motorph.Payslip.generateNBPayslip;
 import static cp2motorph.Payslip.generateWPayslip;
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,40 +27,66 @@ public class CP2motorPH {
      */
     public static void main(String[] args) {
        
-        //file handling for payroll run summary
-            //delete existing file
-            File paySumC = new File("paySummary.txt");
-
-            if (paySumC.delete()) {
-                System.out.println("Process Reset any existing paySummary.txt will reset to blank.");
-            }else{
-                System.out.println(" ");
-            }
-
-            //create a paysummary file
-            File paySum = new File("paySummary.txt");
-
-            try{
-            if(paySum.createNewFile()) {
-                System.out.println("New paySummary file is created sucessfully." + "\n");
-            }else {
-                System.out.println(" ");
-            }}catch (IOException ex) {
-                System.out.println(" ");
-            }
-            
-        //print header into the file
-        try{
-        FileWriter header = new FileWriter("paySummary.txt");
-        PrintWriter prheader = new PrintWriter(header);
+        // Specify the directory where the files are located (current directory in this example)
+        File directory = new File(".");
         
-        prheader.printf("%-15s%-33s%-16s%-12s%-20s%-16s%-24s%-15s%-15s","Employee#","Employee Name","GrossPay","SSS","PhilHealth","PagIbig","WitholdingTax","Benefits","NetPay");
-        header.close();
-        }catch (IOException ex) {
+        // Get all the files in the directory
+        File[] files = directory.listFiles();
+        
+        if (files != null) {
+            // Iterate through the files
+            for (File file : files) {
+                // Check if the file is a .txt file and starts with "Employee"
+                if (file.isFile() && file.getName().startsWith("Employee") && file.getName().endsWith(".txt")) {
+                    // Delete the file
+                    if (file.delete()) {
+                        System.out.println(file.getName() + " deleted.");
+                    } else {
+                        System.out.println("Failed to delete " + file.getName());
+                    }
+                }
+            }
+        }
+        
+        // File handling for payroll run summary
+        // Delete existing paySummary.txt file
+        File paySumC = new File("paySummary.txt");
+
+        if (paySumC.delete()) {
+            System.out.println("Process Reset: any existing paySummary.txt will reset to blank.");
+        } else {
             System.out.println(" ");
-}
-            startPayroll();
+        }
+
+        // Create a new paySummary file
+        File paySum = new File("paySummary.txt");
+
+        try {
+            if (paySum.createNewFile()) {
+                System.out.println("New paySummary file is created successfully." + "\n");
+            } else {
+                System.out.println(" ");
+            }
+        } catch (IOException ex) {
+            System.out.println(" ");
+        }
+
+        // Print header into the file
+        try {
+            FileWriter header = new FileWriter("paySummary.txt");
+            PrintWriter prheader = new PrintWriter(header);
+            
+            prheader.printf("%-15s%-33s%-16s%-12s%-20s%-16s%-24s%-15s%-15s",
+                "Employee#", "Employee Name", "GrossPay", "SSS", "PhilHealth", 
+                "PagIbig", "WitholdingTax", "Benefits", "NetPay");
+            prheader.close();
+        } catch (IOException ex) {
+            System.out.println(" ");
+        }
+
+        startPayroll();
     }
+
          
          public static void startPayroll(){
             //list of employee details array
@@ -259,20 +286,38 @@ public class CP2motorPH {
 
     public static void viewSummary() {
         clearConsole();
-        //print out list of employee
-        System.out.println("\n"+"Hello, Here's the pay data captured on the Pay Summary file" + "\n");
-        
-        try{
-        BufferedReader payrollSummary = new BufferedReader(new FileReader("paySummary.txt"));
-        String line;
-        while((line = payrollSummary.readLine()) !=null) {
-        System.out.println(line);}
-        payrollSummary.close();
-        }catch (IOException e) {
-            System.out.println("Error ecountered reading the file...");
+
+        // Print out list of employees
+        System.out.println("\n" + "Hello, Here's the pay data captured on the Pay Summary file" + "\n");
+
+        // Read and print the contents of paySummary.txt
+        try (BufferedReader payrollSummary = new BufferedReader(new FileReader("paySummary.txt"))) {
+            String line;
+            while ((line = payrollSummary.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error encountered reading the file...");
         }
-        
-        System.out.println("\n"+"Continue with payroll calculation." + "\n");
+
+        // Automatically launch the paySummary.txt file
+        File file = new File("paySummary.txt");
+        if (file.exists()) {
+            if (Desktop.isDesktopSupported()) {
+                Desktop desktop = Desktop.getDesktop();
+                try {
+                    desktop.open(file);
+                } catch (IOException e) {
+                    System.out.println("Error encountered opening the file...");
+                }
+            } else {
+                System.out.println("Desktop is not supported on this platform.");
+            }
+        } else {
+            System.out.println("The file paySummary.txt does not exist.");
+        }
+
+        System.out.println("\n" + "Continue with payroll calculation." + "\n");
         startPayroll();
     }
 
